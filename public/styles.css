@@ -1,0 +1,231 @@
+body {
+    background-image: url("background-image.jpg"); /* Replace with your image URL */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    padding-top: 50px;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: rgb(255, 255, 255);
+    margin: 0;
+    font-family: 'Muli', sans-serif;
+}
+
+/* Navbar Styles */
+.navbar {
+    background-color: rgba(41, 55, 70, 0.8);
+}
+
+.navbar-brand,
+.navbar-nav .nav-link {
+    color: #fff;
+    font-weight: 600;
+}
+
+.btn-login {
+    background-color: #007bff;
+    border-color: #007bff;
+    font-size: 20px;
+}
+
+.btn-login:hover {
+    background-color: #0056b3;
+}
+
+/* Search Form Styles */
+.search-form {
+    background-color: rgba(248, 249, 250, 0.8);
+    padding: 20px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+#allRoomData {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between; 
+    width: 100%;/* Adjust as needed */
+    gap: 20px;
+  }
+  #searchResults {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between; 
+    width: 100%;/* Adjust as needed */
+    gap: 20px;
+  }
+  .roomId{
+    width: 300px;
+  }
+  .room-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* Adjust the gap between cards */
+    justify-content: center; /* Optional: Center the cards horizontally */
+  }
+
+/* Jumbotron Styles */
+.jumbotron {
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 30px;
+    border-radius: 10px;
+    color: #fff;
+}
+
+/* Featured Rooms Section Styles */
+.featureRooms {
+    text-align: center;
+    padding: 40px 0;
+   
+    border-radius: 10px;
+   
+    
+}
+
+#searchResultsParagraph{
+
+    text-align: center;
+    padding: 40px 0;
+   
+    border-radius: 10px;
+   
+    
+}
+
+
+
+/* Rental Card Styles */
+.room-card {
+    width: 300px;
+    margin: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.card__img img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 5px 5px 0 0;
+}
+
+.card__content {
+    padding: 15px;
+}
+
+.card__content h3 {
+    font-size: 20px;
+    margin: 0;
+    font-weight: 600;
+}
+
+.location {
+    margin-top: 10px;
+    font-size: 16px;
+}
+
+.room-info {
+    margin-top: 10px;
+}
+
+.room-info p {
+    font-size: 16px;
+    margin: 5px 0;
+}
+
+.card__btn {
+    display: block;
+    width: 100%;
+    padding: 10px 0;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 0 0 5px 5px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: background-color 0.3s ease;
+    font-weight: 600;
+}
+
+.card__btn:hover {
+    background-color: #0056b3;
+}
+
+/* Login and Create Account Form Styles */
+.col-md-6.offset-md-3 {
+    margin-top: 20px;
+}
+
+.card-header {
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #fff;
+}
+
+.toggle-form {
+    cursor: pointer;
+}
+
+.toggle-form a {
+    text-decoration: none;
+    color: #007bff;
+    font-weight: 600;
+}
+
+/* About and Contact Section Styles */
+#about,
+#contact {
+    padding: 30px;
+   
+    margin-top: 40px;
+   
+   
+}
+
+h2 {
+    font-size: 28px;
+    margin-top: 40px;
+    font-weight: 600;
+}
+
+/* Services Section Styles */
+#Services {
+    padding: 20px;
+}
+
+.service-item {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.fa-3x {
+    font-size: 3rem;
+}
+
+/* Footer Styles */
+footer {
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+}
+
+.copyright {
+    display: flex;
+    justify-content: space-between;
+}
+
+.line-menu li {
+    list-style: none;
+    display: inline;
+    margin-right: 20px;
+}
+
+.line-menu li a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: 600;
+}

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rental House Searching System</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Custom CSS -->
+  <style>
+    body {
+      background-image: url('/house_background.jpg');
+      background-size: cover;
+      padding-top: 50px;
+    }
+
+    .navbar {
+      background-color: #343a40;
+    }
+
+    .navbar-brand,
+    .navbar-nav .nav-link {
+      color: #fff;
+    }
+
+    .search-form {
+      background-color: #f8f9fa;
+      padding: 20px;
+      border-radius: 5px;
+      margin-bottom: 20px;
+    }
+
+    .rental-card {
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      padding: 10px;
+      margin-bottom: 20px;
+    }
+
+    footer {
+      background-color: #343a40;
+      color: #fff;
+      padding: 20px 0;
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="#">Rental House Searching</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#home">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#about">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#contact">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div id="home" class="container">
+    <div class="jumbotron text-center text-white">
+      <h1 class="display-4">Find Your Dream Rental House</h1>
+      <p class="lead">Search and book rental houses in your preferred location.</p>
+    </div>
+  </div>
+
+  <div id="about" class="container">
+    <h2>About Us</h2>
+    <p>This is a rental house searching system where you can find and book your dream rental house easily. Our platform
+      connects rental owners and tenants to simplify the rental process.</p>
+  </div>
+
+  <div id="contact" class="container">
+    <h2>Contact Us</h2>
+    <p>If you have any questions or inquiries, please feel free to contact us.</p>
+    <div class="row mt-5">
+      <div class="col-md-6 offset-md-3">
+        <div class="card">
+          <div class="card-body">
+            <form>
+              <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" id="name" required>
+              </div>
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" id="email" required>
+              </div>
+              <div class="form-group">
+                <label for="message">Message</label>
+                <textarea class="form-control" id="message" rows="5" required></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="search-form">
+      <form onsubmit="searchHouses(event)">
+        <div class="row g-3">
+          <div class="col-md-4">
+            <label for="location">Location</label>
+            <input type="text" class="form-control" id="location" placeholder="Enter location">
+          </div>
+          <div class="col-md-3">
+            <label for="checkIn">Preferred area</label>
+            <input type="text" class="form-control" id="checkIn">
+          </div>
+          <div class="col-md-3">
+            <label for="checkOut">Check-In</label>
+            <input type="date" class="form-control" id="checkOut">
+          </div>
+          <div class="col-md-2">
+            <label style="visibility: hidden;">Search</label>
+            <button type="submit" class="btn btn-primary form-control">Search</button>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <h2>Featured Listings</h2>
+
+    <div class="row" id="rentalCards">
+      <!-- Rental house cards will be dynamically added here -->
+    </div>
+  </div>
+
+  <!-- Modal for Booking Confirmation -->
+  <div class="modal fade" id="bookingConfirmationModal" tabindex="-1" role="dialog" aria-labelledby="bookingConfirmationModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="bookingConfirmationModalLabel">Booking Confirmation</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>Your booking has been confirmed. An email notification has been sent to the rental owner.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // JavaScript code for searching houses and posting new room will go here
+    // This section is already included in previous responses
+  </script>
+
+  <!-- JavaScript for posting new room and booking functionality -->
+  <script>
+    // JavaScript code for posting new room and booking functionality will go here
+    // This section is already included in previous responses
+  </script>
+</body>
+
+</html>

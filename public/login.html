@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+   
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="styles.css">
+    <!-- Custom CSS -->
+    <style>
+        /* Global Styles */
+        body {
+            background-image: url("background-image.jpg"); /* Replace with your image URL */
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            padding-top: 50px;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: rgba(240, 240, 240, 0.84);
+            margin: 0;
+            font-family: 'Muli', sans-serif;
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            background-color: rgba(41, 55, 70, 0.8);
+        }
+
+        .navbar-brand,
+        .navbar-nav .nav-link {
+            color: #fff;
+            font-weight: 600;
+        }
+
+
+        .btn-login {
+            background-color: #007bff;
+            border-color: #007bff;
+            font-size: 20px;
+        }
+
+        .btn-login:hover {
+            background-color: #0056b3;
+        }
+
+        /* Search Form Styles */
+        .search-form {
+            background-color: rgba(248, 249, 250, 0.8);
+            padding: 20px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Jumbotron Styles */
+        .jumbotron {
+            background-color: rgba(0, 0, 0, 0.6);
+            padding: 30px;
+            border-radius: 10px;
+            color: #fff;
+        }
+
+        /* Featured Rooms Section Styles */
+        .featureRooms {
+            text-align: center;
+            padding: 40px 0;
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Rental Card Styles */
+        .room-card {
+            width: 300px;
+            margin: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .card__img img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 5px 5px 0 0;
+        }
+
+        .card__content {
+            padding: 15px;
+        }
+
+        .card__content h3 {
+            font-size: 20px;
+            margin: 0;
+            font-weight: 600;
+        }
+
+        .location {
+            margin-top: 10px;
+            font-size: 16px;
+        }
+
+        .room-info {
+            margin-top: 10px;
+        }
+
+        .room-info p {
+            font-size: 16px;
+            margin: 5px 0;
+        }
+
+        .card__btn {
+            display: block;
+            width: 100%;
+            padding: 10px 0;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 0 0 5px 5px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background-color 0.3s ease;
+            font-weight: 600;
+        }
+
+        .card__btn:hover {
+            background-color: #0056b3;
+        }
+
+        /* Login and Create Account Form Styles */
+        .col-md-6.offset-md-3 {
+            margin-top: 20px;
+        }
+
+        .card-header {
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: #fff;
+        }
+
+        .toggle-form {
+            cursor: pointer;
+        }
+
+        .toggle-form a {
+            text-decoration: none;
+            color: #007bff;
+            font-weight: 600;
+        }
+
+        /* About and Contact Section Styles */
+        #about,
+        #contact {
+            padding: 30px;
+            border-radius: 10px;
+            margin-top: 40px;
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        h2 {
+            font-size: 28px;
+            margin-top: 40px;
+            font-weight: 600;
+        }
+
+        /* Services Section Styles */
+        #Services {
+            padding: 20px;
+            background-color: rgba(248, 249, 250, 0.8);
+        }
+
+        .service-item {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .fa-3x {
+            font-size: 3rem;
+        }
+
+        /* Footer Styles */
+        footer {
+            background-color: rgba(0, 0, 0, 0.8);
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        .copyright {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .line-menu li {
+            list-style: none;
+            display: inline;
+            margin-right: 20px;
+        }
+
+        .line-menu li a {
+            text-decoration: none;
+            color: #fff;
+            font-weight: 600;
+        }
+        #allRoomData {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between; 
+            width: 100%;/* Adjust as needed */
+            gap: 20px;
+          }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">Rental House Searching</a>
+            <!-- Add a logo if desired -->
+            <!-- <img src="logo.png" alt="Logo" width="50"> -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mr-auto"> <!-- Changed ml-auto to mr-auto -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="http://localhost:5000">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="http://localhost:5000/aboutfile">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="http://localhost:5000/contactfile">Contact</a>
+                    </li>
+                </ul>
+                
+            </div>
+        </div>
+    </nav>
+    
+    <div class="container">
+        <div id="error-message"></div>
+
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Login or Create an Account</h3>
+                        <h4 class="toggle-form">This is for Rental Onwers only !</h4>
+                    </div>
+                    <div class="card-body">
+                        <!-- Login Form -->
+                        <form id="login-form" onsubmit="handleSubmit(event)">
+
+                            <div class="form-group">
+                                <label for="login-email" >Email</label>
+                                <input type="email" class="form-control" id="login-email" placeholder="Enter your email">
+                            </div>
+                            <div class="form-group">
+                                <label for="login-password" >Password</label>
+                                <input type="password" class="form-control" id="login-password"
+                                    placeholder="Enter your password">
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-block">Login</button>
+                            <button id="logout-button" class="btn btn-danger" style="display: none;">Logout</button>
+                            
+                        </form>
+                        
+
+
+                        <form   onsubmit="registerUser(event)" id="create-account-form" action="/create-account" method="POST" style="display: none;">
+                            <h1>Create Account</h1>
+                            <div class="form-group">
+                                <label for="registerUsername">Username</label>
+                                <input type="text" class="form-control" id="username" required>
+                                
+                              </div>
+                              <div class="form-group">
+                                <label for="registerEmail">Email</label>
+                                <input type="email" class="form-control" id="email" required>
+                                <small id="emailError" class="text-danger"></small>
+                                
+                              </div>
+                              <div class="form-group">
+                                <label for="registerPassword">Password</label>
+                                <input type="password" class="form-control" id="password" required>
+                                <small id="passwordError" class="text-danger"></small>
+                                
+                              </div>
+                              <div class="form-group">
+                                <label for="confirmPassword">Confirm Password</label>
+                                <input type="password" class="form-control" id="confirmPassword" required>
+                              </div>
+                              <div class="form-group">
+                                <label for="plotnumber">plot-Number
+                                <input type="text" class="form-control" id="plotnumber" required>
+                              </div>
+                              <button type="submit"  class="btn btn-primary">Register</button>
+                        </form>
+                        <div class="switch">
+            <p>Don't have an account? <a href="#" id="switch-to-create">Create one</a></p>
+        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+       
+    </div>
+    <script>
+
+
+        document.getElementById("switch-to-create").addEventListener("click", function (e) {
+            e.preventDefault();
+            document.getElementById("login-form").style.display = "none";
+            document.getElementById("create-account-form").style.display = "block";
+        });
+        // Function to handle form submission
+        function handleSubmit(event) {
+            event.preventDefault(); // Prevent the default form submission behavior
+
+            // Get the values entered by the user
+            const email = document.getElementById("login-email").value;
+            const password = document.getElementById("login-password").value;
+
+            // Create an object to hold the user's data
+            const userData = {
+                email:email,
+                password: password
+            };
+
+            // Send the user data to the server for authentication
+            fetch("/login", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(userData)
+            })
+            .then(response => response.json())
+            .then(data => {
+             
+                if (data.error) {
+                    alert('Error: ' + data.error);
+                } else {
+                    // Redirect or perform other actions on successful login
+                    window.location.href = "newRoomfile";
+                }
+                    
+            
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+                const errorMessageDiv = document.getElementById('error-message');
+                errorMessageDiv.textContent = 'Error: ' + error;
+            });
+        }
+
+        // Add a submit event listener to the form
+       //const loginForm = document.querySelector("login-form");
+       // loginForm.addEventListener("submit", handleSubmit);
+       function displayError(elementId, message) {
+        const errorElement = document.getElementById(elementId);
+        if (errorElement) {
+            errorElement.textContent = message;
+        }
+    }
+    
+    function clearErrors() {
+        const errorElements = document.getElementsByClassName('text-danger');
+        for (const element of errorElements) {
+            element.textContent = '';
+        }
+    }
+    
+    function isValidEmail(email) {
+        // Implement email validation logic as needed
+        const emailRegex = /.+\@.+\..+/;
+        return emailRegex.test(email);
+    }
+//register
+      function registerUser(event) {
+
+        event.preventDefault();
+
+        const username = document.getElementById('username').value;
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+        const confirmPassword = document.getElementById('confirmPassword').value;
+
+        // Validate password and confirmPassword
+        clearErrors();
+
+  // Perform client-side validation
+  if (!username) {
+      displayError('usernameError', 'Username is required');
+      return;
+  }
+  if (!email) {
+      displayError('emailError', 'Email is required');
+      return;
+  }
+  if (!isValidEmail(email)) {
+      displayError('emailError', 'Please provide a valid email address');
+      return;
+  }
+  if (!password) {
+      displayError('passwordError', 'Password is required');
+      return;
+  }
+  if (password.length < 6) {
+      displayError('passwordError', 'Password must be at least 6 characters');
+      return;
+  }
+  if (password !== confirmPassword) {
+      displayError('confirmPasswordError', 'Passwords do not match');
+      return;
+  }
+
+  if (password !== confirmPassword) {
+          alert('Passwords do not match.');
+          return;
+        }
+ 
+        // Perform AJAX request to the server to register a new user
+       fetch('/register', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ username, email, password })
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            // Handle the response, e.g., display a success message
+            console.log('User registered successfully:', data);
+            alert('Registration successful! You can now login.');
+            // Redirect to the login page after successful registration
+            window.location.replace('/loginfile');
+          })
+          .catch((error) => {
+            console.error('Error registering user:', error);
+            alert('Failed to register user. Please try again.');
+            window.location.replace('/loginfile');
+          });
+      }
+
+    /*  function displayError(elementId, message) {
+        const errorElement = document.getElementById(elementId);
+        if (errorElement) {
+            errorElement.textContent = message;
+        }
+    }
+    
+    function clearErrors() {
+        const errorElements = document.getElementsByClassName('text-danger');
+        for (const element of errorElements) {
+            element.textContent = '';
+        }
+    }
+    
+    function isValidEmail(email) {
+        // Implement email validation logic as needed
+        const emailRegex = /.+\@.+\..+/;
+        return emailRegex.test(email);
+    }
+
+      function registerUser(event) {
+  event.preventDefault();
+
+  const username = document.getElementById('username').value;
+  const email = document.getElementById('email').value;
+  const password = document.getElementById('password').value;
+  const confirmPassword = document.getElementById('confirmPassword').value;
+
+  // Validate password and confirmPassword
+  clearErrors();
+
+  // Perform client-side validation
+  if (!username) {
+      displayError('usernameError', 'Username is required');
+      return;
+  }
+  if (!email) {
+      displayError('emailError', 'Email is required');
+      return;
+  }
+  if (!isValidEmail(email)) {
+      displayError('emailError', 'Please provide a valid email address');
+      return;
+  }
+  if (!password) {
+      displayError('passwordError', 'Password is required');
+      return;
+  }
+  if (password.length < 6) {
+      displayError('passwordError', 'Password must be at least 6 characters');
+      return;
+  }
+  if (password !== confirmPassword) {
+      displayError('confirmPasswordError', 'Passwords do not match');
+      return;
+  }
+
+  if (password !== confirmPassword) {
+    alert('Passwords do not match.');
+    return;
+  }
+
+  // Create a user object to send to the server
+  const user = { username, email, password };
+
+  // Perform the AJAX request to the server to register a new user
+  fetch('/register', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(user),
+  })
+    .then(async (response) => {
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error);
+      }
+      return response.json();
+    })
+    .then((data) => {
+      // Handle the response, e.g., display a success message
+      console.log('User registered successfully:', data);
+      alert('Registration successful! You can now login.');
+      // Redirect to the login page after successful registration
+      window.location.replace('/loginfile');
+    })
+    .catch((error) => {
+      console.error('Error registering user:', error.message);
+      alert('Failed to register user. ' + error.message);
+      window.location.replace('/loginfile');
+    });
+
+
+   
+}*/
+
+
+
+    </script>
+</body>
+</html>

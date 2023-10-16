@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rental House Searching System</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Custom CSS -->
+  <style>
+    body {
+      padding-top: 50px;
+    }
+
+    .navbar {
+      background-color: #343a40;
+    }
+
+    .navbar-brand,
+    .navbar-nav .nav-link {
+      color: #fff;
+    }
+
+    .search-form {
+      background-color: #f8f9fa;
+      padding: 20px;
+      border-radius: 5px;
+      margin-bottom: 20px;
+    }
+
+    .rental-card {
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      padding: 10px;
+      margin-bottom: 20px;
+    }
+
+    footer {
+      background-color: #343a40;
+      color: #fff;
+      padding: 20px 0;
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <div class="container">
+        <a class="navbar-brand" href="#">Rental House Searching</a>
+        <!-- Add a logo if desired -->
+        <!-- <img src="logo.png" alt="Logo" width="50"> -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mr-auto"> <!-- Changed ml-auto to mr-auto -->
+                <li class="nav-item">
+                    <a class="nav-link" href="http://localhost:5000">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="http://localhost:5000/aboutfile">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="http://localhost:5000/contactfile">Contact</a>
+                </li>
+            </ul>
+            <div style="position: absolute; top: 10px; right: 10px;">
+              <a href="/loginfile" class="btn btn-primary">LogOut</a>
+          </div>
+        </div>
+    </div>
+</nav>
+
+
+  <div class="container">
+    <div class="row mt-5">
+      <div class="col-md-6 offset-md-3">
+        <div class="card">
+          <div class="card-header">
+            <h3>Post Vacant Room</h3>
+          </div>
+          <div class="card-body">
+            <form id="newRoomForm" onsubmit="postNewRoom(event)" enctype="multipart/form-data">
+              <div class="form-group">
+                <label for="roomType">Room Type</label>
+                <input type="text" class="form-control" id="roomType" required>
+              </div>
+              <div class="form-group">
+                <label for="county">County</label>
+                <input type="text" class="form-control" id="county" required>
+              </div>
+              <div class="form-group">
+                <label for="roomLocation">Location</label>
+                <input type="text" class="form-control" id="roomLocation" required>
+              </div>
+              <div class="form-group">
+                <label for="roomPrice">Price</label>
+                <input type="number" class="form-control" id="roomPrice" required>
+              </div>
+              <div class="form-group">
+                <label for="roomDeposit">Deposit</label>
+                <input type="number" class="form-control" id="roomDeposit" required>
+              </div>
+              <div class="form-group">
+                <label for="phoneNumber">Phone Number</label>
+                <input type="tel" inputmode="numeric" class="form-control" id="phoneNumber" pattern="[0-9]{10}" title="Please enter a valid 10-digit phone number (e.g., 1234567890)" required>
+                <small class="text-muted">Please enter a 10-digit phone number (e.g., 1234567890).</small>
+            </div>
+            
+              <div class="form-group">
+                <label for="roomBathrooms">Bathrooms</label>
+                <input type="number" class="form-control" id="roomBathrooms" required>
+              </div>
+              <div class="form-group">
+                <label for="roomBedrooms">Bed Rooms</label>
+                <input type="number" class="form-control" id="roomBedrooms">
+              </div>
+              <div class="form-group">
+                <label for="secretKey">Secret Key (Important)</label>
+                <input type="number" class="form-control" id="secretkey" required minlength="4">
+              </div>
+              <div class="form-group">
+                <label for="room_description">Description</label>
+                <textarea class="form-control" id="room_description" rows="5" required></textarea>
+              </div>
+              <div class="form-group">
+                <label for="roomImage" max>Room Image</label>
+                <input type="file" class="form-control-file" id="roomImage">
+              </div>
+              <button type="submit" class="btn btn-primary">Post Room</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript -->
+  <script>
+    // Function to post a new room
+   /* function postNewRoom(event) {
+      event.preventDefault();
+    
+      const fileInput = document.getElementById('roomImage').value;
+      const roomType = document.getElementById('roomType').value;
+      const county=document.getElementById('county').value
+      const location = document.getElementById('roomLocation').value;
+      const price = document.getElementById('roomPrice').value;
+      const bedrooms = document.getElementById('roomBedrooms').value;
+      const bathrooms = document.getElementById('roomBathrooms').value;
+    
+
+      const roomImage=fileInput.files[0]
+      // Create the data object to send in the POST request
+      const roomData = {
+        roomType: roomType,
+        county:county,
+        location: location,
+        price: price,
+        bedrooms: bedrooms,
+        bathrooms: bathrooms,
+        roomImage:roomImage
+      };
+    
+      // Perform the POST request to the server to add a new room
+      fetch('http://localhost:5000/newRoom', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(roomData),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          // Handle the response, e.g., display a success message
+          console.log('Room posted successfully:', data);
+          console.log(roomData)
+          alert('Room posted successfully!');
+          // Clear the form fields after successful submission
+          document.getElementById('newRoomForm').reset();
+        })
+        .catch((error) => console.error('Error posting room:', error));
+    }*/
+    function postNewRoom(event) {
+  event.preventDefault();
+
+  const fileInput = document.getElementById('roomImage');
+  const roomType = document.getElementById('roomType').value;
+  const county = document.getElementById('county').value;
+  const location = document.getElementById('roomLocation').value;
+  const price = document.getElementById('roomPrice').value;
+  const phoneNumber=document.getElementById('phoneNumber').value
+  const roomDeposit = document.getElementById('roomDeposit').value;
+  const room_description = document.getElementById('room_description').value;
+  const secretkey = document.getElementById('secretkey').value;
+  const bedrooms = document.getElementById('roomBedrooms').value;
+  const bathrooms = document.getElementById('roomBathrooms').value;
+
+  // Create a new FormData object
+  const formData = new FormData();
+  formData.append('roomImage', fileInput.files[0]);
+  formData.append('roomType', roomType);
+  formData.append('county', county);
+  formData.append('location', location);
+  formData.append('price', price);
+  formData.append('bedrooms', bedrooms);
+  formData.append('bathrooms', bathrooms);
+  formData.append('phoneNumber',phoneNumber)
+  formData.append('roomDeposit',roomDeposit)
+  formData.append('secretkey',secretkey)
+  formData.append('room_description', room_description)
+
+  // Perform the POST request to the server to add a new room
+  fetch('http://localhost:5000/newRoom', {
+    method: 'POST',
+    body: formData, // Use the FormData object as the body
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      // Handle the response, e.g., display a success message
+      console.log('Room posted successfully:', data);
+      alert('Room posted successfully!');
+      // Clear the form fields after successful submission
+      document.getElementById('newRoomForm').reset();
+    })
+    .catch((error) => console.error('Error posting room:', error));
+}
+
+  </script>
+</body>
+
+</html>

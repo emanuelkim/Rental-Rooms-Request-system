@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Information</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Muli:400,400i,500,600,700&amp;display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f8f9fa;
+        }
+
+        .form-container {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .form-group label {
+            font-weight: bold;
+        }
+
+        .form-group input {
+            margin: 10px 0;
+        }
+
+
+        footer {
+            background-color: #343a40;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+            width: 100%;
+            position: absolute;
+            bottom: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2>Booking Information</h2>
+        <!-- Changed the form's action to point to the JavaScript function -->
+        <form id="bookingForm" onsubmit="bookingRoom(event)">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" id="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" id="email" required>
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="tel" class="form-control" id="phone" required>
+            </div>
+            <div class="form-group">
+                <label for="checkOut">Check-In</label>
+                <input type="date" class="form-control" id="checkIn">
+            </div>
+            <div class="submit-btn">
+                <button type="submit" class="btn btn-primary">Book</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        &copy; 2023 Your Company Name. All rights reserved.
+    </footer>
+
+    <!-- Include Bootstrap JS and Popper.js (for Bootstrap functionality) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Added the JavaScript code for submitting the form -->
+    <script>
+    function bookingRoom(event) {
+            event.preventDefault();
+        
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const checkIn = document.getElementById('checkIn').value;
+        
+            // Extract the room ID from the URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const roomId = urlParams.get('room');
+        
+            // Create the data object to send in the POST request
+            const bookingData = {
+                name: name,
+                email: email,
+                phone: phone,
+                checkIn: checkIn,
+                roomId: roomId, // Add the room ID to the booking data
+            };
+        
+            // Send the booking data to the server
+            fetch('http://localhost:5000/booking', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(bookingData),
+            })
+            .then((response) => response.json())
+            .then((data) => {
+                // Handle the response, e.g., display a success message
+                console.log('Room booked successfully:', data);
+                alert('Room booked successfully!');
+        
+                // Clear the form fields after successful submission
+                document.getElementById('bookingForm').reset();
+        
+                // Redirect back to the test.html page (optional)
+                window.location.href = 'http://localhost:5000/testfile';
+            })
+            .catch((error) => console.error('Error booking:', error));
+        
+        }
+        /*function bookingRoom(event) {
+            event.preventDefault();
+
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const checkIn = document.getElementById('checkIn').value;
+
+            // Create the data object to send in the POST request
+            const bookingData = {
+                name: name,
+                email: email,
+                phone: phone,
+                checkIn: checkIn,
+            };
+
+            fetch('http://localhost:5000/booking', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(bookingData),
+            })
+                /*.then((response) => response.json())
+                .then((data) => {
+                    if (data && data.success) {
+                        // Handle booking success, e.g., display a success message
+                        console.log('Room booked successfully:', data);
+                        alert('Room booked successfully!');
+
+                        // Redirect back to the test.html page with the room ID to remove
+                        window.location.href = `test.html?room=${roomId}`;
+                    } else {
+                        // Handle booking failure, e.g., display an error message
+                        console.error('Room booking failed:', data.error);
+                        alert('Room booking failed. Please try again later.');
+                    }
+                })
+                .catch((error) => {
+                    console.error('Error booking room:', error);
+                    alert('An error occurred while booking the room. Please try again later.');
+                });*/
+                /*.then((response) => response.json())
+                .then((data) => {
+                    console.log('Response from server:', data); // Log the response data
+                    if (data && data.success) {
+                        // Handle booking success
+                        console.log('Room booked successfully:', data);
+                        alert('Room booked successfully!');
+                        // Redirect or perform any other actions
+                    } else {
+                        // Handle booking failure
+                        console.error('Room booking failed:', data.error);
+                        alert('Room booking failed. Please try again later.');
+                    }
+                })
+                .catch((error) => {
+                    console.error('Error booking room:', error);
+                    alert('An error occurred while booking the room. Please try again later.');
+                });
+                
+
+
+
+
+
+        }*/
+        
+    </script>
+</body>
+</html>

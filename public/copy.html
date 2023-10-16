@@ -1,0 +1,37 @@
+
+  <section   id="prodetails" class="section-p1">
+        <div class="single-pro-image">
+          
+          <br>
+          <div class="main-image">
+            <img id="mainCarImage" src="" alt="" />
+          </div>
+          <br>
+          <div class="small-img-group" id="carImagesContainer">
+            <!-- Car images will be displayed here -->
+          </div>
+        </div>
+        <div class="single-pro-details">
+            <h3 id="carTitle" style="margin-top: -50px;"></h3>
+          <h2 id="carPrice"></h2>
+          <p id="carDetails"> </p>
+          <!-- Add more car details here -->
+        </div>
+      
+      <script>
+        // Fetch car data from the API
+        fetch("/roomDetails")
+          .then(response => response.json())
+          .then(data => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const roomId = urlParams.get('id');
+            const filteredroom = data.find(room => room._id == roomId);
+      
+            // Display car details
+            document.getElementById('carTitle').textContent = `${filteredroom.room_type} `
+            document.getElementById('mainCarImage').src = `/public/uploads/${filteredroom.roomImage}`;
+            document.getElementById('carPrice').textContent = `Ksh ${filteredroom.room_price}`;
+            document.getElementById('carDetails').textContent = `${filteredroom.room_description}`;
+          })
+            </script>
+</section>

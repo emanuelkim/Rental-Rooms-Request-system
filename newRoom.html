@@ -1,0 +1,258 @@
+<<div class="container">
+  <div class="row mt-5">
+    <div class="col-md-6 offset-md-3">
+      <div class="card">
+        <div class="card-header">
+          <h3>Post New Room</h3>
+        </div>
+        <div class="card-body">
+          <form onsubmit="postNewRoom(event)">
+            <div class="form-group">
+              <label for="roomType">Room Type</label>
+              <input type="text" class="form-control" id="roomType" required>
+            </div>
+            <div class="form-group">
+              <label for="roomLocation">Location</label>
+              <input type="text" class="form-control" id="roomLocation" required>
+            </div>
+            <div class="form-group">
+              <label for="roomPrice">Price</label>
+              <input type="number" class="form-control" id="roomPrice" required>
+            </div>
+            <div class="form-group">
+              <label for="roomBedrooms">Bedrooms</label>
+              <input type="number" class="form-control" id="roomBedrooms" required>
+            </div>
+            <div class="form-group">
+              <label for="roomBathrooms">Bathrooms</label>
+              <input type="number" class="form-control" id="roomBathrooms" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Post Room</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function postNewRoom(event) {
+    event.preventDefault();
+
+    const roomType = document.getElementById('roomType').value;
+    const location = document.getElementById('roomLocation').value;
+    const price = document.getElementById('roomPrice').value;
+    const bedrooms = document.getElementById('roomBedrooms').value;
+    const bathrooms = document.getElementById('roomBathrooms').value;
+
+    // Perform AJAX request to the server to post a new room
+    fetch('/newRoom', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ roomType, location, price, bedrooms, bathrooms })
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        // Handle the response, e.g., display a success message
+        console.log('Room posted successfully:', data);
+        alert('Room posted successfully!');
+        // Refresh the page after successful posting
+        fetchListings(); // Fetch rental listings again to include the newly added room
+      })
+      .catch((error) => console.error('Error posting room:', error));
+  }
+
+  // Fetch rental listings when the page loads
+  fetchListings();
+</script>
+</body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- ... (Head content remains the same) ... -->
+  <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rental House Searching System</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <style>
+      body {
+      
+        padding-top: 50px;
+      }
+  
+      .navbar {
+        background-color: #343a40;
+      }
+  
+      .navbar-brand,
+      .navbar-nav .nav-link {
+        color: #fff;
+      }
+  
+      .search-form {
+        background-color: #f8f9fa;
+        padding: 20px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+      }
+  
+      .rental-card {
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 10px;
+        margin-bottom: 20px;
+      }
+  
+      footer {
+        background-color: #343a40;
+        color: #fff;
+        padding: 20px 0;
+      }
+    </style>
+</head>
+
+<body>
+  <!-- Post New Room Form -->
+  
+ <div class="container">
+  <div class="row mt-5">
+    <div class="col-md-6 offset-md-3">
+      <div class="card">
+        <div class="card-header">
+          <h3>Post New Room</h3>
+        </div>
+        <div class="card-body">
+          <form onsubmit="postNewRoom(event)">
+            <div class="form-group">
+              <label for="roomType">Room Type</label>
+              <input type="text" class="form-control" id="roomType" required>
+            </div>
+            <div class="form-group">
+              <label for="roomLocation">Location</label>
+              <input type="text" class="form-control" id="roomLocation" required>
+            </div>
+            <div class="form-group">
+              <label for="roomPrice">Price</label>
+              <input type="number" class="form-control" id="roomPrice" required>
+            </div>
+            <div class="form-group">
+              <label for="roomBedrooms">Bedrooms</label>
+              <input type="number" class="form-control" id="roomBedrooms" required>
+            </div>
+            <div class="form-group">
+              <label for="roomBathrooms">Bathrooms</label>
+              <input type="number" class="form-control" id="roomBathrooms" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Post Room</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function postNewRoom(event) {
+    event.preventDefault();
+
+    const roomType = document.getElementById('roomType').value;
+    const location = document.getElementById('roomLocation').value;
+    const price = document.getElementById('roomPrice').value;
+    const bedrooms = document.getElementById('roomBedrooms').value;
+    const bathrooms = document.getElementById('roomBathrooms').value;
+
+    // Create the data object to send in the POST request
+    const roomData = {
+      roomType: roomType,
+      location: location,
+      price: price,
+      bedrooms: bedrooms,
+      bathrooms: bathrooms,
+    };
+
+    // Perform the POST request to the server
+    fetch('/newRoom', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(roomData),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        // Handle the response, e.g., display a success message
+        console.log('Room posted successfully:', data);
+        alert('Room posted successfully!');
+        // Refresh the page after successful posting
+        fetchListings(); // Fetch rental listings again to include the newly added room
+        window.location.href = '/test.html';
+      })
+      .catch((error) => console.error('Error posting room:', error));
+  }
+
+  // Function to fetch rental listings from the server and update the UI
+  function fetchListings() {
+    // Perform AJAX request to the server to get rental listings
+    fetch('/houses')
+      .then((response) => response.json())
+      .then((data) => {
+        // Handle the received data and update the UI with rental listings
+        const rentalListingsDiv = document.getElementById('rentalListings');
+        rentalListingsDiv.innerHTML = '';
+
+        data.forEach((listing) => {
+          const cardDiv = document.createElement('div');
+          cardDiv.className = 'col-md-4';
+          cardDiv.innerHTML = `
+            <div class="rental-card">
+              <h3>${listing.roomType}</h3>
+              <p>Location: ${listing.location}</p>
+              <p>Price: $${listing.price}/month</p>
+              <p>Bedrooms: ${listing.bedrooms}</p>
+              <p>Bathrooms: ${listing.bathrooms}</p>
+              <p>Owner: ${listing.rentOwner.username}</p>
+              <button class="btn btn-success">Book Now</button>
+            </div>
+          `;
+          rentalListingsDiv.appendChild(cardDiv);
+        });
+      })
+      .catch((error) => console.error('Error fetching rental listings:', error));
+  }
+   
+  // Fetch rental listings when the page loads
+  fetchListings();
+  document.getElementById('newRoomForm').addEventListener('submit', postNewRoom);
+
+</script>
+</html>

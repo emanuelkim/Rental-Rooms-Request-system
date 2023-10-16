@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rental House Searching System</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Muli:400,400i,500,600,700&amp;display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+    <style>
+
+        body {
+            background-image: url("background-image.jpg"); /* Replace with your image URL */
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            padding-top: 50px;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: rgb(255, 255, 255);
+            margin: 0;
+            font-family: 'Muli', sans-serif;
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            background-color: rgba(41, 55, 70, 0.8);
+        }
+
+        .navbar-brand,
+        .navbar-nav .nav-link {
+            color: #fff;
+            font-weight: 600;
+        }
+
+        .btn-login {
+            background-color: #007bff;
+            border-color: #007bff;
+            font-size: 20px;
+        }
+
+        .btn-login:hover {
+            background-color: #0056b3;
+        }
+
+        /* Search Form Styles */
+        .search-form {
+            background-color: rgba(248, 249, 250, 0.8);
+            padding: 20px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+        }
+        #allRoomData {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between; 
+            width: 100%;/* Adjust as needed */
+            gap: 20px;
+          }
+          #searchResults {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between; /* Fix the typo here */
+            width: 100%;
+            gap: 20px;
+        }
+          .roomId{
+            width: 300px;
+          }
+          .room-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px; /* Adjust the gap between cards */
+            justify-content: center; /* Optional: Center the cards horizontally */
+          }
+
+        /* Jumbotron Styles */
+        .jumbotron {
+            background-color: rgba(0, 0, 0, 0.6);
+            padding: 30px;
+            border-radius: 10px;
+            color: #fff;
+        }
+
+        /* Featured Rooms Section Styles */
+        .featureRooms {
+            text-align: center;
+            padding: 40px 0;
+           
+            border-radius: 10px;
+           
+            
+        }
+       
+            
+        
+        #searchResultsParagraph{
+        
+            text-align: center;
+            padding: 40px 0;
+           
+            border-radius: 10px;
+           
+            
+        }
+
+        
+
+        /* Rental Card Styles */
+        .room-card {
+            width: 300px;
+            margin: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .card__img img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 5px 5px 0 0;
+        }
+
+        .card__content {
+            padding: 15px;
+        }
+
+        .card__content h3 {
+            font-size: 20px;
+            margin: 0;
+            font-weight: 600;
+        }
+
+        .location {
+            margin-top: 10px;
+            font-size: 16px;
+        }
+
+        .room-info {
+            margin-top: 10px;
+        }
+
+        .room-info p {
+            font-size: 16px;
+            margin: 5px 0;
+        }
+
+        .card__btn {
+            display: block;
+            width: 100%;
+            padding: 10px 0;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 0 0 5px 5px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background-color 0.3s ease;
+            font-weight: 600;
+        }
+
+        .card__btn:hover {
+            background-color: #0056b3;
+        }
+
+        /* Login and Create Account Form Styles */
+        .col-md-6.offset-md-3 {
+            margin-top: 20px;
+        }
+
+        .card-header {
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: #fff;
+        }
+
+        .toggle-form {
+            cursor: pointer;
+        }
+
+        .toggle-form a {
+            text-decoration: none;
+            color: #007bff;
+            font-weight: 600;
+        }
+
+        /* About and Contact Section Styles */
+        #about,
+        #contact {
+            padding: 30px;
+           
+            margin-top: 40px;
+           
+           
+        }
+
+        h2 {
+            font-size: 28px;
+            margin-top: 40px;
+            font-weight: 600;
+        }
+
+        /* Services Section Styles */
+        #Services {
+            padding: 20px;
+        }
+
+        .service-item {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .fa-3x {
+            font-size: 3rem;
+        }
+
+        /* Footer Styles */
+        footer {
+            background-color: rgba(0, 0, 0, 0.8);
+            color: #fff;
+            padding: 30px 0;
+            text-align: center;
+        }
+
+        .copyright {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .line-menu li {
+            list-style: none;
+            display: inline;
+            margin-right: 20px;
+        }
+
+        .line-menu li a {
+            text-decoration: none;
+            color: #fff;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <!-- Navigation Bar -->
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <div class="container">
+        <a class="navbar-brand" href="#">Rental House Searching</a>
+        <!-- Add a logo if desired -->
+        <!-- <img src="logo.png" alt="Logo" width="50"> -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mr-auto"> <!-- Changed ml-auto to mr-auto -->
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="http://localhost:5000/aboutfile">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="http://localhost:5000/contactfile">Contact</a>
+                </li>
+            </ul>
+            <div style="position: absolute; top: 10px; right: 10px;">
+                <a href="/loginfile" style="color: white; text-decoration: none; padding: 8px 16px; border-radius: 4px; font-weight: 600;">Login/Register</a>
+            </div>
+            
+        
+        </div>
+    </div>
+</nav>
+
+    <!-- Search Form -->
+    <div class="container">
+        <div class="jumbotron text-center">
+          <h1 class="display-4">Find affordable  Rental Houses</h1>
+          <p class="lead">Search and book rental houses in your preferred location.</p>
+          <a id="searchNowLink" class="btn btn-primary btn-lg" href="#searchForm" role="button">Search Now</a>
+          <a class="btn btn-primary btn-lg" href="#Services" role="button">Learn more</a>
+      </div>
+      <div class="search-form" hidden>
+        <form id="searchForm" onsubmit="searchRooms(event)">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="county">County</label>
+                        <select class="form-control" id="county">
+                            <option selected>Choose...</option>
+                            <option>Mombasa</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <label for="location">Location</label>
+                    <input type="text" class="form-control" id="location">
+                </div>
+                <div class="col-md-3">
+                    <label for="checkOut">Check-In</label>
+                    <input type="date" class="form-control" id="checkOut">
+                </div>
+                <div class="col-md-2">
+                    <label style="visibility: hidden;">Search</label>
+                    <button type="submit" class="btn btn-primary form-control">Search</button>
+                </div>
+            </div>
+        </form>
+    </div>
+       <div><h3 id="searchResultsParagraph" hidden>Search Results</h3></div> 
+          
+    </div>
+
+    <div class="container">
+  
+        <div class="row1">
+          <!-- <div class="row rental-card" data-room-id="${room._id}">-->
+                 <div id="searchResults"  class="row"></div>
+             <!-- Newly posted room data will be displayed here -->
+           </div>
+    <!-- Jumbotron -->
+    
+
+    <!-- Featured Rooms Section -->
+    <section class="featureRooms">
+       
+          <div><h1 id="feartureRooms" class="featureRooms">All Rooms  Listings</h1></div>
+            
+            <div  id= 'allRoomData'  class="row"  > </div>
+
+
+           
+                <!-- Rental Card 2 -->        <!-- Rental Card 3 -->
+                
+       
+    </section>
+
+    <!-- Login and Create Account Forms -->
+   
+    <div id="about" class="container">
+    <section id="About" class="py-1 bg-gray">
+      <div class="full-row">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="content-sidebar p-4">
+                <div class="mb-3 col-lg-12">
+                  <h4 class="text-secondary double-down-line text-center mb-4">About Us</h4>
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <h4>Our Mission</h4>
+                      <p>We are dedicated to simplifying the rental experience for both property owners and tenants. Our mission is to provide high-quality rental house management services that exceed our clients' expectations.</p>
+                    </div>
+
+                    <div class="col-lg-6">
+                      <h4>Why Choose Us</h4>
+                      <p></p>
+                      <ul>
+                        <li>Experienced Team</li>
+                        <li>Comprehensive Services</li>
+                        <li>Client-Centric Approach</li>
+                        <li>Technology-Driven Solutions</li>
+                        <li>Community Involvement</li>
+                      </ul>
+                      <p></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="container">
+            <h2>Contact Us</h2>
+            <p>If you have any questions or inquiries, feel free to contact us using the information below:</p>
+            <div class="row">
+                <div class="col-md-6">
+                    <h3>Location</h3>
+                    <p>123 Main Street<br>City, State 12345<br>Country</p>
+                </div>
+                <div class="col-md-6">
+                    <h3>Contact Information</h3>
+                    <p>Email: info@rentalhouse.com<br>Phone: +1 (123) 456-7890</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="Services">
+        <div class="container">
+            <h2>Our Services</h2>
+            <div class="row">
+                <div class="col-md-4 service-item">
+                    <i class="fa fa-search fa-3x"></i>
+                    <h4>Property Search</h4>
+                    <p>Search for rental houses based on your preferences such as location, price, and number of bedrooms.</p>
+                </div>
+                <div class="col-md-4 service-item">
+                    <i class="fa fa-list fa-3x"></i>
+                    <h4>Property Listings</h4>
+                    <p>View detailed listings of available rental houses, complete with photos and property details.</p>
+                </div>
+                <div class="col-md-4 service-item">
+                    <i class="fa fa-envelope fa-3x"></i>
+                    <h4>Contact Owners</h4>
+                    <p>Contact property owners or agents directly to schedule viewings or ask questions about the properties.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+   <!-- Footer -->
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="footer-section">
+                    <h3>About Us</h3>
+                    <p>We are your trusted source for finding the perfect rental house. Our mission is to make your search easier and more convenient.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <ul>
+                        <li>Email: info@rentalhouse.com</li>
+                        <li>Phone: +1 (123) 456-7890</li>
+                        <li>123 Main Street, City, State 12345, Country</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="footer-section">
+                    <h3>Follow Us</h3>
+                    <div class="social-icons">
+                        <a href="https://www.facebook.com/" target="_blank"><i class="fa fa-facebook"></i></a>
+                        <a href="https://www.twitter.com/" target="_blank"><i class="fa fa-twitter"></i></a>
+                        <a href="https://www.instagram.com/" target="_blank"><i class="fa fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+
+
+
+    <!-- Bootstrap JS, Popper.js, and jQuery -->
+    
+    <script>
+  
+
+    // Function to handle "Book Now" button click
+     const searchNowLink = document.getElementById('searchNowLink');
+    const searchFormDiv = document.querySelector('.search-form');
+  
+    searchNowLink.addEventListener('click', function(event) {
+      event.preventDefault(); // Prevent the default link behavior
+      searchFormDiv.toggleAttribute('hidden'); // Toggle the 'hidden' attribute
+    });
+
+    
+    function bookNow(roomId) {
+        // Redirect to the booking page with the room ID as a query parameter
+        window.location.href = `/booking.html?room=${roomId}`;
+    }
+
+    // Function to fetch and display all room data
+    function fetchAllRoomData() {
+        fetch('/allRooms')
+            .then((response) => response.json())
+            .then((data) => {
+                if (data && data.length > 0) {
+                    const roomDataDiv = document.getElementById('allRoomData');
+                    roomDataDiv.innerHTML = ''; // Clear existing data
+
+                    // Loop through the room data and display each room
+                    data.forEach((room) => {
+                        const roomCard = document.createElement('div');
+                        roomCard.className = 'roomId';
+                        roomCard.innerHTML = `
+                        
+                           
+                            <div >
+                                <div class="card__img">
+                                    
+                                    <img src="/public/uploads/${room.roomImage}" alt='${room.roomImage}  width=200px'>
+                                </div>
+                                <div class="card__content">
+                                    
+                                    <p class="location">${room.location}</p>
+                                    <div class="room-info">
+                                        <p><i class="fa fa-bed"></i>${room.roomType}</p>
+                                        <p><i class="fa fa-bed"></i>${room.phoneNumber}</p>
+                                       
+                                        <p><i class="fa fa-ksh"></i>${room.price}</p>
+                                    </div>
+                                    <a href="room_description.html?id=${room._id}" id="viewDetailsLink" class="btn btn-primary card__btn">View Details</a>
+                                </div>
+                            </div>
+                            
+                     
+                      
+                      
+                      
+    
+                        
+                        `;
+                        roomDataDiv.appendChild(roomCard);
+                    });
+                } else {
+                    // Handle the case where no room data is available
+                    const roomDataDiv = document.getElementById('allRoomData');
+                    roomDataDiv.innerHTML = '<h4>No Rooms Available.</h4>';
+                }
+            })
+            .catch((error) => {
+                console.error('Error fetching all room data:', error);
+                // Handle the error as needed
+            });
+    }
+
+
+
+
+
+    function searchRooms(event) {
+        event.preventDefault(); // Prevent the form from submitting normally
+        const searchResultsParagraph = document.getElementById('searchResultsParagraph');
+        const searchResultsDiv = document.getElementById('searchResults');
+      
+        const county = document.getElementById('county').value;
+        const location = document.getElementById('location').value;
+        const checkIn = document.getElementById('checkOut').value;
+      
+        const searchData = {
+          county: county,
+          location: location,
+          checkIn: checkIn,
+        };
+      
+        fetch('/searchRooms', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(searchData),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            if (data && data.length > 0) {
+              searchResultsDiv.innerHTML = ''; // Clear existing results
+      
+              // Loop through the search results and display each room
+              data.forEach((room) => {
+                const roomCard = document.createElement('div');
+                roomCard.className = 'roomId';
+                roomCard.innerHTML = `
+                  <div class="card__img">
+                    
+                    <img src="/public/uploads/${room.roomImage}" alt='${room.roomImage}' width=200px>
+                  </div>
+                  <div class="card__content">
+                    <p class="location">${room.location}</p>
+                    <div class="room-info">
+                      <p><i class="fa fa-bed"></i>${room.roomType}</p>
+                      <p><i class="fa fa-ksh"></i>${room.price}</p>
+                    </div>
+                    <a href="room_description.html?id=${room._id}" class="btn btn-primary card__btn">View Details</a>
+                  </div>`;
+                searchResultsDiv.appendChild(roomCard);
+              });
+              searchResultsParagraph.removeAttribute('hidden');
+            } else {
+              // Handle the case where no search results are available
+              searchResultsParagraph.setAttribute('hidden', 'true');
+              searchResultsDiv.innerHTML = '<h4>No matching results found.</h4>';
+            }
+          })
+          .catch((error) => {
+            console.error('Error fetching search results:', error);
+            // Handle the error as needed
+          });
+    }
+    
+
+/*function searchRooms(event) {
+    event.preventDefault(); // Prevent the form from submitting normally
+     const searchResultsParagraph = document.getElementById('searchResultsParagraph');
+  
+    const county = document.getElementById('county').value;
+    const location = document.getElementById('location').value;
+    const checkIn = document.getElementById('checkOut').value;
+  
+    const searchData = {
+      county: county,
+      location: location,
+      checkIn: checkIn,
+    };
+  
+    fetch('/searchRooms', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(searchData),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data && data.length > 0) {
+          const searchResultsDiv = document.getElementById('searchResults');
+          searchResultsDiv.innerHTML = ''; // Clear existing results
+  
+          // Loop through the search results and display each room
+          data.forEach((room) => {
+            const roomCard = document.createElement('div');
+            roomCard.className = 'roomId';
+            roomCard.innerHTML = `
+   
+            <div >
+                <div class="card__img">
+                    <img src="uploads/${room.roomImage}" alt='${room.roomImage}'>
+                </div>
+                <div class="card__content">
+                    
+                    <p class="location">${room.location}</p>
+                    <div class="room-info">
+                        <p><i class="fa fa-bed"></i>${room.roomType}</p>
+                       
+                        <p><i class="fa fa-ksh"></i>${room.price}</p>
+                    </div>
+                    <a href="" class="card__btn">View Details</a>
+                </div>
+            </div>
+            
+            `;
+            searchResultsDiv.appendChild(roomCard);
+          });
+          searchResultsParagraph.removeAttribute('hidden');
+        } else {
+          // Handle the case where no search results are available
+          const searchResultsDiv = document.getElementById('searchResults');
+          searchResultsParagraph.setAttribute('hidden', 'true');
+          searchResultsDiv.innerHTML = '<h4>No matching results found.</h4>';
+        }
+      })
+      .catch((error) => {
+        console.error('Error fetching search results:', error);
+        // Handle the error as needed
+      });
+  }*/
+  
+fetchAllRoomData();
+searchRooms();
+
+    
+    document.addEventListener('DOMContentLoaded', function () {
+      // Function to parse query parameters from URL
+      function getQueryParameters() {
+          const queryString = window.location.search;
+          const urlParams = new URLSearchParams(queryString);
+          return Object.fromEntries(urlParams.entries());
+      }
+  
+      // Check for a room ID in the URL
+      const queryParams = getQueryParameters();
+      if (queryParams.room) {
+          // Remove the room element with the matching room ID
+          const roomIdToRemove = queryParams.room;
+          const roomToRemove = document.querySelector(`[data-room-id="${roomIdToRemove}"]`);
+          if (roomToRemove) {
+              roomToRemove.remove();
+          }
+      }
+  });
+
+  
+</script>
+</body>
+</html>
